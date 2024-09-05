@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link th:href="@{/styles/css/adminPage.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="header-panel">
+    <a href="/superadmin">
+        <button class="button-home">Home</button>
+    </a>
+    <a href="/logout">
+        <button class="button-exit">Logout</button>
+    </a>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.email}"></td>
+        <td>
+            <span th:each="role : ${user.roles}" th:text="${role.name} + ';'"></span>
+        </td>
+        <td>
+            <form action="/superadmin/change_role" method="post" >
+                <label>
+                    <select name="roleId">
+                        <option value="1">User</option>
+                        <option value="2">Admin</option>
+                    </select>
+                </label>
+                <input type="hidden" name="userId" th:value="${user.id}">
+                <button class="button-change" type="submit">Change role</button>
+            </form>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+</body>
+<script>
+
+</script>
+</html>

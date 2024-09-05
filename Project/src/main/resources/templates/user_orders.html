@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My orders</title>
+    <link th:href="@{/styles/css/userOrders.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>My orders</h1>
+<div class="order-container" th:each="order : ${orders}">
+    <div class="order-details">
+        <h3>Order Details</h3>
+        <div class="order-info">
+            <p>Time: <span th:text="${#temporals.format(order.time, 'MM/d, HH:mm ')}"></span></p>
+            <p>Check: <span th:text="${order.shippingCost}+' ₴'"></span></p>
+            <p>Delivery method: <span th:text = "${order.deliveryMethod}"></span>
+            <ul>
+                <li th:each="orderItem : ${order.orderItems}">
+                    <span th:text="${orderItem.restaurantName}"></span><br>
+                    Dish: <span th:text="${orderItem.menuName}"></span>
+                    Quantity: <span th:text="${orderItem.menuQuantity}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

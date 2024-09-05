@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant Menu</title>
+    <link th:href="@{/styles/css/menuRestaurantPage.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>Menu for <span th:text="${restaurant.name}"></span></h1>
+<div th:if="${errorMessage}" style="color: red; font-size: 14px; text-align: center;margin-bottom: 5px">
+    <p id="error" style="display: block;" th:text="${errorMessage}"></p>
+</div>
+<div id="menu-container">
+    <div class="menu-container" th:each="menuItem, ItemStat : ${menuItems}">
+        <div class="menu-cart">
+            <img th:src="@{'/static/images/restaurants/' + ${menuItem.getName()} + '.jpg'}" class="card-img-top"
+                 alt="${menuItem.name}">
+                <span id="restaurant-name" th:text="${menuItem.name}"></span>
+            <div class="menu-item-details">
+                <span th:text="${menuItem.price}+' ₴'"></span>
+                <span th:text="${menuItem.weight} + ' g/' + ${menuItem.serving} + ' pcs'"></span>
+            </div>
+            <form th:action="@{/cart/add/{id}(id=${menuItem.id})}" method="post" onsubmit="return validateRestaurant()">
+                <input type="hidden" name="id" th:value="${menuItem.id}"/>
+                <input type="hidden" name="name" th:value="${menuItem.name}"/>
+                <input type="hidden" name="price" th:value="${menuItem.price}"/>
+                <input type="hidden" name="restaurantName" th:value="${restaurant.name}"/>
+                <input type="hidden" name="restaurantId" th:value="${restaurant.id}"/>
+                <input type="hidden" name="deliveryMethod" th:value="${restaurant.deliveryMethod}"/>
+                <div class="add-to-cart">
+                    <label class="quantity" for="quantity"></label>
+                    <input class="quantity" type="number" id="quantity" name="quantity" min="1" value="1">
+                    <button type="submit">Add to cart</button>
+                </div>
+            </form>
+            <div class="details-modal">
+                <a href=" " class="btn btn-primary" onclick="showDetailsDishForm('details-${menuItem.id}')">Details</a>
+                <span id="details-${menuItem.id}" style="display: block;" th:text="${menuItem.description}"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="href">
+<a class="back-to-restaurant" href="/">← Back to the restaurants</a>
+    <a class="go-to-cart" href="/cart">Go to Cart →</a>
+</div>
+</body>
+<script>
+
+    function openModal(menuItemId) {
+        var modal = document.getElementById("myModal");
+        var modalContent = "Content for menu item with id: " + menuItemId;
+
+        modal.innerHTML = modalContent;
+        modal.style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = "none";
+    }
+
+    function validateRestaurant() {
+        var restaurantName = document.getElementById("restaurantName").value;
+        var selectedRestaurant = document.getElementById("restaurantId").value;
+
+        if (restaurantName !== selectedRestaurant) {
+            document.getElementById("errorMessage").style.display = "block";
+            return false;
+        }
+
+        return true;
+    }
+
+    function showError() {
+        event.preventDefault()
+        const form = document.getElementById("error");
+        if (form.style.display !== 'none') {
+            form.style.display = 'none';
+        } else {
+            form.style.display = 'block';
+        }
+    }
+
+    function showDetailsDishForm(index) {
+        var detailsId = "details-" + index;
+        var detailsElement = document.getElementById(detailsId);
+        if (detailsElement.style.display === "none"|| detailsElement.style.display === "") {
+            detailsElement.style.display = "block";
+        } else {
+            detailsElement.style.display = "none";
+        }
+    }
+</script>
+</html>

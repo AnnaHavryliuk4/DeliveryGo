@@ -1,0 +1,30 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Menu Item</title>
+    <link th:href="@{/styles/css/adminPage.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>Edit Menu Item</h1>
+
+<form th:action="@{'/' + ${restaurantId} + '/update/' + ${id}}" method="post">
+    <input type="hidden" name="id" th:value="${id}">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:value="${menuItem.name}">
+    <br>
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" th:value="${menuItem.price}">
+    <br>
+    <label for="weight">Weight:</label>
+    <input type="number" id="weight" name="weight" th:value="${menuItem.weight}" required>
+    <br>
+    <label for="serving">Serving:</label>
+    <input type="number" id="serving" name="serving" th:value="${menuItem.serving}" required>
+    <br>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" th:value="${menuItem.description}" required>
+    <br>
+    <button class="button-change" type="submit">Save</button>
+</form>
+</body>
+</html>

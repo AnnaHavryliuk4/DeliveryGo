@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GO</title>
+    <link th:href="@{/styles/css/mainPage.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="header-container">
+    <div class="delivery-label">GO | ck</div>
+    <a th:href="@{/user_orders/{userId}(userId=${userId})}">
+        <img src="static/images/restaurants/user.jpg" alt="user_orders" class="user_orders-button">
+    </a>
+    <a th:href="@{/cart}">
+        <button class="button-function">Cart</button>
+    </a>
+    <form th:action="@{/log}" method="get">
+        <button class="button-function" type="button" onclick="showModal()">Logout</button>
+    </form>
+</div>
+<div class="restaurantsFilter-container">
+    <form action="/" method="get">
+        <button class="restaurantFilter-button" type="submit">All Restaurants</button>
+    </form>
+    <form action="/delivery" method="get">
+        <button class="restaurantFilter-button" type="submit">Delivery</button>
+    </form>
+    <form action="/takeout" method="get">
+        <button class="restaurantFilter-button" type="submit">Takeout</button>
+    </form>
+</div>
+<div id="restaurants-container" class="row">
+    <div class="restaurant-container" th:each="restaurant : ${restaurants}">
+        <a th:href="@{/restaurant/{id}/menu(id=${restaurant.id})}">
+            <button class="restaurant-button">
+                <img th:src="@{'/static/images/restaurants/' + ${restaurant.name} + '.jpg'}" class="card-img-top"
+                     alt="${restaurant.name}">
+                <span th:text="${restaurant.name}"></span>
+            </button>
+        </a>
+    </div>
+</div>
+<div id="modal" class="modal">
+<div class = "modal-content">
+        <h2>Are you sure you want to log out?</h2>
+
+        <a class="a-logout" onclick="closeModal()">Cancel</a>
+        <a class="a-logout" th:href="@{/logout}">Exit</a>
+</div>
+</div>
+<script>
+    function showModal() {
+        var modal = document.getElementById('modal');
+        modal.style.display = 'block';
+
+    }
+
+    function closeModal() {
+        var modal = document.getElementById('modal');
+        modal.style.display = 'none';
+    }
+</script>
+</body>
+</html>

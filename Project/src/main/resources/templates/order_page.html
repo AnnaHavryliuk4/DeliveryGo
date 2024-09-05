@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <link th:href="@{/styles/css/order.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <form th:action="@{/order/create}" method="post">
+        <label for="deliveryMethod">Method of receiving the order:</label>
+        <select id="deliveryMethod" name="deliveryMethod">
+            <option value="takeout">Takeout</option>
+            <option value="delivery" th:if="${deliveryMethod}=='delivery'">Delivery</option>
+        </select><br>
+        <input type="hidden" name="orderId" th:value="${order.id}"/>
+
+        <label for="name">* Name of customer:</label>
+        <input class="input-container" type="text" id="name" name="customerName" maxlength="10" pattern="[A-Za-z\s]+" required><br>
+
+        <label for="phone">* Phone number:</label>
+        <input class="input-container" type="tel" id="phone" name="phoneNumber"  required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+        <p style="margin-left:60px;color:red;margin-top:0; font-size: 12px" >phone-format: (000-000-0000)<p>
+
+        <div class="form-row">
+            <label class="hidden" style="display: none" for="address" id="addressLabel">* Address:</label>
+            <input class="input-container" type="text" id="address" name="address" maxlength="30">
+        </div>
+
+        <div class="form-row">
+            <label for="addressNotes" id="addressNotesLabel">Address notes:</label>
+            <input class="input-container" type="text" id="addressNotes" name="addressNotes" maxlength="30">
+        </div>
+
+        <label for="notes">Notes:</label>
+        <textarea class="input-container" id="notes" name="notes"></textarea><br>
+
+        <br>Check: <span id="check" class="price" th:text="${check}+ ' ₴'"></span>
+        <br>Delivery: <span id="deliveryPrice" class="price" th:text="${deliveryPrice}+' ₴'"></span>
+        <br>Total price: <span id="totalPrice" class="price" th:text="${totalPrice}+' ₴'"></span><br>
+        <input type="hidden" name="shippingCost" th:value="${totalPrice}"/>
+        <input type="hidden" name="userId" th:value="${order.userId}"/>
+        <label for="paymentMethod">Method of payment:</label>
+        <select id="paymentMethod" name="paymentMethod">
+            <option value="Card" th:selected="${order.paymentMethod == 'Card'}">Card</option>
+            <option value="Cash" th:selected="${order.paymentMethod == 'Cash'}">Cash</option>
+        </select><br>
+        <label for="time">Receipt time:</label>
+        <span id="time" th:text="${formattedReceiptTime}" ></span><br>
+        <input type="hidden" name="receiptTime" th:value="${formattedReceiptTime}"/>
+        <button type="submit" id="confirmOrder">Confirm the order</button>
+    </form>
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deliveryMethod = document.getElementById('deliveryMethod');
+        const addressField = document.getElementById('address');
+        const addressNotesField = document.getElementById('addressNotes');
+        const addressLabel = document.getElementById('addressLabel');
+        const addressNotesLabel = document.getElementById('addressNotesLabel');
+
+        function toggleAddressFieldRequirement() {
+            if (deliveryMethod.value === 'takeout') {
+                addressField.removeAttribute('required');
+                addressLabel.classList.add('hidden');
+            } else {
+                addressField.setAttribute('required', 'required');
+                addressLabel.classList.remove('hidden');
+            }
+        }
+
+        function toggleAddressFields() {
+            if (deliveryMethod.value === 'takeout') {
+                addressField.style.display = 'none';
+                addressNotesField.style.display = 'none';
+                addressLabel.style.display = 'none';
+                addressNotesLabel.style.display = 'none';
+            } else {
+                addressField.style.display = 'block';
+                addressNotesField.style.display = 'block';
+                addressLabel.style.display = 'block';
+                addressNotesLabel.style.display = 'block';
+            }
+        }
+        updateDeliveryPrice();
+
+        toggleAddressFieldRequirement();
+        deliveryMethod.addEventListener('change', toggleAddressFieldRequirement);
+
+        toggleAddressFields();
+        deliveryMethod.addEventListener('change', toggleAddressFields);
+    });
+
+    function updateDeliveryPrice() {
+        const deliveryMethod = document.getElementById('deliveryMethod').value;
+        const deliveryPriceField = document.getElementById('deliveryPrice');
+        const checkPrice = parseFloat(document.getElementById('check').textContent);
+
+        let deliveryPrice = 0;
+        if (deliveryMethod === 'delivery') {
+            deliveryPrice = 70;
+        }
+
+        deliveryPriceField.textContent = deliveryPrice + ' ₴';
+        document.getElementById('totalPrice').textContent = (checkPrice + deliveryPrice) + ' ₴';
+    }
+
+    document.getElementById('deliveryMethod').addEventListener('change', updateDeliveryPrice);
+
+    document.addEventListener('DOMContentLoaded', function () {
+        updateDeliveryPrice();
+    });
+
+</script>
+</html>

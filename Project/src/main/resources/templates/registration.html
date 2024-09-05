@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration and Login System</title>
+    <link th:href="@{/styles/css/registr.css}" rel="stylesheet"/>
+</head>
+<body>
+<form action="/registration" th:object="${user}" method="POST">
+    <div class="container">
+        <h1>Registration</h1>
+        <div class="form-group">
+            <label for="username">Name:</label>
+            <input th:field="*{username}" type="text" class="form-control" id="username" name="username"
+                   placeholder="Enter your name" required>
+            <div class="error" th:if="${#fields.hasErrors('username')}">
+                <span th:each="error : ${errors}" th:if="${error.field == 'username'}"
+                      th:text="${error.defaultMessage}"></span>
+            </div>
+            <div class="error"  th:if="${usernameExists}">
+                 th:text="${usernameExists}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input th:field="*{email}" type="email" class="form-control" id="email" name="email"
+                   placeholder="Enter your email" required>
+            <div class="error" th:if="${#fields.hasErrors('email')}">
+                <span th:each="error : ${errors}" th:if="${error.field == 'email'}"
+                      th:text="${error.defaultMessage}"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input th:field="*{password}" type="password" class="form-control" id="password" name="password"
+                   placeholder="Enter your password" required th:maxlength="15">
+            <div class="error"  th:if="${#fields.hasErrors('password')}">
+                <span th:each="error : ${errors}" th:if="${error.field == 'password'}"
+                      th:text="${error.defaultMessage}"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                   placeholder="Confirm your password" required>
+            <div class="error" th:if="${passwordMatch}">
+                <p th:text="${passwordMatch}"></p>
+            </div>
+        </div>
+        <input type="hidden" name="${csrf.parameterName}" value="${csrf.token}"/>
+        <button type="submit" class="btn btn-primary">Continue</button>
+        <p>Already have an account?
+            <a th:href="@{/login}">Sign in</a>
+        </p>
+    </div>
+</form>
+</body>
+</html>
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <link th:href="@{/styles/css/adminPage.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>Menu for <span th:text="${restaurant.name}"></span></h1>
+
+<div class="header-panel">
+    <a href="/admin">
+        <button class="button-home">Home</button>
+    </a>
+    <a href="/logout">
+        <button class="button-exit">Logout</button>
+    </a>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Weight</th>
+        <th>Serving</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="menuItem : ${menuItems}" onclick="openModal()">
+        <td th:text="${menuItem.name}"></td>
+        <td th:text="${menuItem.price}"></td>
+        <td th:text="${menuItem.weight}"></td>
+        <td th:text="${menuItem.serving}"></td>
+        <td th:text="${menuItem.description}"></td>
+        <td>
+            <form th:action="@{'/' + ${restaurantId} + '/delete/' + ${menuItem.getId()}}" method="post">
+                <button class="button-delete" type="submit">Delete</button>
+            </form>
+            <form th:action="@{'/' + ${restaurantId} + '/edit/' + ${menuItem.getId()}}" method="get">
+                <button class="button-change" type="submit">Edit</button>
+            </form>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<div class="add-modal">
+    <a href=" " class="btn btn-primary" onclick="showAddDishForm()">Add new dish</a>
+
+    <form id="add-form" style="display: none;" th:action="@{'/'+ ${restaurant.getId()}+'/add'}" method="post" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required>
+        <br>
+        <label for="weight">Weight:</label>
+        <input type="number" id="weight" name="weight" required>
+        <br>
+        <label for="serving">Serving:</label>
+        <input type="number" id="serving" name="serving" required>
+        <br>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required>
+        <br>
+        <span>Image:</span>
+        <input type="file" class="form-control-file" id="image" name="image" style="display: none; " required>
+        <button type="button" class="btn btn-secondary" onclick="document.getElementById('image').click();">Select
+            Image
+        </button>
+        <span id="selectedFileName"></span>
+        <br>
+        <button class="button-save" type="submit">Add a dish</button>
+    </form>
+</div>
+<div th:if="${successMessage}" class="alert alert-success" role="alert"
+     style="color: green; font-size: 24px;text-align: center;margin-bottom: 5px; display: block;"
+     id="successMessageDiv">
+    <span th:text="${successMessage}"></span>
+</div>
+</body>
+<script>
+    function showAddDishForm() {
+        event.preventDefault()
+        const form = document.getElementById("add-form");
+        if (form.style.display !== 'none') {
+            form.style.display = 'none';
+        } else {
+            form.style.display = 'block';
+        }
+    }
+
+    var successMessageDiv = document.getElementById('successMessageDiv');
+    window.onload = function () {
+        setTimeout(function () {
+            successMessageDiv.style.display = 'none';
+        }, 3000);
+    };
+</script>
+</html>

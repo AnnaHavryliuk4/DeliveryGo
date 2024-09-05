@@ -1,0 +1,192 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    display: block;
+    align-content: center;
+    font-size: 24px;
+    text-align: center;
+    margin: 40px auto;
+    border-radius: 10px;
+    border-color: darkturquoise;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    padding: 5px;
+    width: fit-content;
+}
+
+#menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 100px;
+    margin-right: 160px;
+    margin-left: 160px;
+    border-color: #cccccc;
+}
+
+.menu-container {
+    flex: 0 0 calc(33.33% - 20px);
+    margin: 10px;
+    text-align: center;
+    position: relative;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+
+.menu-cart img {
+    width: 350px;
+    height: 160px;
+    object-fit: cover;
+    margin-bottom: 40px;
+    border-radius: 10px;
+}
+#restaurant-name{
+    font-weight: bold;
+}
+
+.menu-cart span {
+    display: flex;
+    float: left;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.menu-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-right: 15px;
+}
+
+.menu-item-details {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: justify;
+    padding: 10px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+}
+
+.add-to-cart {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+#quantity {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 2px 5px;
+    width: 60px;
+    height: 30px;
+}
+
+.menu-cart button {
+    background-color: darkturquoise;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    float: right;
+    margin-bottom: 10px;
+}
+.menu-cart button:hover{
+    background-color: teal;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20%;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    font-size: 20px;
+    color: white;
+    background-color: darkturquoise;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+label {
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+
+.details-modal a {
+    margin-top: 5px;
+    text-decoration: black;
+    color: darkturquoise;
+    font-size: 18px;
+}
+.details-modal span{
+    margin-top: 5px;
+    position: relative;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+a {
+    text-decoration: black;
+    color: darkturquoise;
+    display: flex;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-left: 154px;
+
+}
+.href{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 180px;
+    margin-left: 20px;
+}
+
+

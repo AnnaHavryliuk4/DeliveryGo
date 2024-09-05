@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurants</title>
+    <link th:href="@{/styles/css/adminPage.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="header-panel">
+    <a href="/admin">
+        <button class="button-home">Home</button>
+    </a>
+    <a href="/logout">
+        <button class="button-exit">Logout</button>
+    </a>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Delivery Method</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="restaurant : ${restaurants}">
+        <td th:text="${restaurant.name}"></td>
+        <td th:text="${restaurant.deliveryMethod}"></td>
+        <td>
+            <div class="btn-group">
+            <form th:action="@{'/delete/' + ${restaurant.id}}" method="post">
+                <button class="button-delete" type="submit">Delete</button>
+            </form>
+            <form th:action="@{/{id}/menu(id=${restaurant.id})}" method="get">
+                <button class="button-show" type="submit">Show menu</button>
+            </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="add-modal">
+<a href="_" class="btn btn-primary" onclick="showAddDishForm()">Add new restaurant</a>
+
+<form id="add-form" style="display: none;" th:action="@{/admin/add}" method="post" enctype="multipart/form-data">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+    <label for="deliveryMethod">Delivery method:</label>
+    <input type="text" id="deliveryMethod" name="deliveryMethod" required>
+    <br>
+    <span>Image:</span>
+    <input type="file" class="form-control-file" id="image" name="image" style="display: none;" required>
+    <button type="button" class="btn btn-secondary" onclick="document.getElementById('image').click();">Select Image</button>
+    <span id="selectedFileName"></span>
+    <br>
+    <button class="button-save" type="submit">Save</button>
+</form>
+</div>
+<div th:if="${successMessage}" class="alert alert-success" role="alert"
+     style="color: green; font-size: 24px;text-align: center;margin-bottom: 5px; display: block;"
+     id="successMessageDiv">
+    <span th:text="${successMessage}"></span>
+</div>
+</body>
+<script>
+    function showAddDishForm() {
+        event.preventDefault()
+        const form = document.getElementById("add-form");
+        if (form.style.display !== 'none') {
+            form.style.display = 'none';
+        } else {
+            form.style.display = 'block';
+        }
+    }
+
+    var successMessageDiv = document.getElementById('successMessageDiv');
+    window.onload = function () {
+        setTimeout(function () {
+            successMessageDiv.style.display = 'none';
+        }, 3000);
+    };
+
+
+</script>
+</html>

@@ -1,0 +1,97 @@
+.header-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: aliceblue;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: left;
+    margin-bottom: 40px;
+}
+
+.button-home, .button-exit {
+    font-size: 24px;
+    background-color: aliceblue;
+    color: black;
+    border: black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.button-home:hover, .button-exit:hover {
+    background-color: darkcyan;
+}
+.btn-group {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-group button {
+    margin-right: 10px;
+}
+table {
+    width: 80%;
+    margin: 80px auto;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+thead {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+h1{
+    text-align: center;
+}
+.add-modal{
+    display: block;
+    margin-left: 160px;
+    margin-top: 40px;
+    padding: 10px;
+}
+.button-change{
+    background-color: darkorange;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.button-save{
+    background-color: darkgreen;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+.button-delete{
+    background-color: darkred;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+.button-show{
+    background-color: darkblue;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+

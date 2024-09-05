@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 500px;
+    margin: 40px auto;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: aliceblue;
+    border: 1px solid black;
+}
+form {
+    padding: 20px;
+}
+label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+
+}
+input,
+input,
+textarea,
+select {
+
+    background-color:white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 30%;
+    font-size: 20px;
+}
+
+select {
+    width: 120px;
+    font-size: 16px;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+button[type="submit"] {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: darkturquoise;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+button[type="submit"]:hover {
+    background-color: #008080;
+}
+span{
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.price{
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+#time{
+    background-color: darkturquoise;
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link th:href="@{/styles/css/adminPage.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="header-panel">
+    <a href="/admin">
+    <button class="button-home">Home</button>
+    </a>
+    <a href="/logout">
+        <button class="button-exit">Logout</button>
+    </a>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.email}"></td>
+        <td>
+            <div class="btn-group">
+                    <button class="button-delete" type="submit">Reset password</button>
+                <form action="/admin/get-user-orders/{userId}" method="get">
+                    <a th:href="@{'/admin/get-user-orders/' + ${user.id}}" class="button-show">Show orders</a>
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div th:if="${successMessage}" class="alert alert-success" role="alert"
+     style="color: green; font-size: 14px;text-align: center;margin-bottom: 5px; display: block;">>
+    <span th:text="${successMessage}"></span>
+</div>
+</body>

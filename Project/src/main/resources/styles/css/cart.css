@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.cart-title{
+    display: block;
+    align-content: center;
+    text-align: center;
+    margin:40px auto;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 800px;
+    margin: 40px auto;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: aliceblue;
+    border: 1px solid black;
+}
+
+.restaurant-name {
+    align-self: flex-start;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    border: 3px solid white;
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+
+}
+.button-actions {
+    background-color: darkturquoise;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+.button-confirm {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    margin-top: 40px;
+    align-content: flex-end;
+    background-color: darkturquoise;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    float: right;
+}
+.button-confirm:hover{
+    background-color: #008080;
+}
+.back-to-restaurant{
+    text-decoration: black;
+    color: darkturquoise;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 345px;
+}
+
+.remove-button {
+    background-color: #bf3b31;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+.item-name{
+    width: 30%;
+}
+.item-price{
+    width: 15%;
+}
+.packaging{
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.total-price {
+    margin-top: 40px;
+    font-size: 24px;
+    font-weight: bold;
+}
+.quantity {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 2px 5px;
+    width: 60px;
+}
+

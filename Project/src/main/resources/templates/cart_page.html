@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link th:href="@{/styles/css/cart.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1 class="cart-title">Cart</h1>
+<div class="container">
+    <div th:each="cartItem : ${cartItems}" class="cart-item">
+        <span class="restaurant-name" th:text="${cartItem.restaurantName}"></span>
+        <span class="item-name" th:text="${cartItem.menuName}"></span>
+        <span class="item-price" th:text="${cartItem.totalPrice}+' ₴'"></span>
+        <form th:action="@{/cart/update-quantity}" method="post">
+            <input type="hidden" name="itemId" th:value="${cartItem.menuId}">
+            <input type="hidden" name="deliveryMethod" th:value="${cartItem.getRestaurantDeliveryMethod()}">
+            <input class="quantity" type="number" min="1" name="newQuantity" th:value="${cartItem.quantity}">
+            <button class="button-actions" type="submit">Update</button>
+        </form>
+        <form th:action="@{/cart/remove/{itemId}(itemId=${cartItem.getId()})}" method="post">
+            <button class="remove-button" type="submit">Remove</button>
+        </form>
+    </div>
+    <div>
+        <span class="packaging" style="text-align: left;">Packaging:<span
+                th:text="'      '+${packagingFee}+' ₴'"></span></span>
+
+    </div>
+    <div>
+        <span class="total-price" style="text-align: left;">Total:<span
+                th:text="'      '+${totalPrice}+' ₴'"></span></span>
+        <form th:action="@{/add-order}" method="post">
+            <button class="button-confirm" type="submit">Confirm</button>
+        </form>
+    </div>
+</div>
+<div class="error" th:if="${param.errorMessage}"
+     style="color: red; font-size: 20px;text-align: center;margin-bottom: 5px; display: block;">
+    <p th:text="${param.errorMessage}"></p>
+</div>
+<a class="back-to-restaurant" href="/">← Back to the restaurants</a>
+</body>
+</html>

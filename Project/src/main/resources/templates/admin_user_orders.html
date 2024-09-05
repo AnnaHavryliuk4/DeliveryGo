@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Orders</title>
+    <link th:href="@{/styles/css/adminPage.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>User Orders</h1>
+<div class="order-container" th:each="order : ${orders}">
+    <div class="order-details">
+        <h3>Order Details</h3>
+        <div class="order-info">
+            <p>Order ID: <span th:text="${order.id}"></span></p>
+            <p>User ID: <span th:text="${order.userId}"></span></p>
+            <p>Customer name: <span th:text="${order.customerName}"></span></p>
+            <p>Phone: <span th:text="${order.phoneNumber}"></span></p>
+            <p>Address: <span th:text="${order.address}"></span></p>
+            <p>Address notes: <span th:text="${order.addressNotes}"></span></p>
+            <p>Notes: <span th:text="${order.notes}"></span></p>
+            <p>Payment method: <span th:text="${order.paymentMethod}"></span></p>
+            <p>Shipping Cost: <span th:text="${order.shippingCost}"></span></p>
+            <p>Delivery Method: <span th:text="${order.deliveryMethod}"></span></p>
+            <p>Order Time: <span th:text="${#temporals.format(order.time, 'MM/dd/yyyy HH:mm')}"></span></p>
+            <p>Receipt Time: <span th:text="${#temporals.format(order.receiptTime, 'MM/dd/yyyy HH:mm')}"></span></p>
+            <ul>
+                <li th:each="orderItem : ${cart}">
+                    <span th:text="${orderItem.restaurantName}"></span><br>
+                    Dish: <span th:text="${orderItem.menuName}"></span><br>
+                    Quantity: <span th:text="${orderItem.menuQuantity}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
